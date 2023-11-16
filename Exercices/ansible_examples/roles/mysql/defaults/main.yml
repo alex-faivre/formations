@@ -1,0 +1,4 @@
+---
+# defaults file for mysql
+message: "Mysql install successful"
+mysql_user: define_me

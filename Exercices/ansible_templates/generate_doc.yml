@@ -1,0 +1,25 @@
+- hosts: localhost
+  gather_facts: false
+  vars:
+    application:
+      name: ghost in the Shell
+      version: 1.0.0
+      requirements:
+        - mysql
+        - nginx
+        - ghost-cli
+        - node.js
+      user: ghost-user
+    mysql:
+      database: "db-ghost-{{ lookup('ansible.builtin.password', '/dev/null', chars=['ascii_letters'], length=8) }}"
+      username: ghost-srv
+      password: "{{ lookup('ansible.builtin.password', '/dev/null', chars=['ascii_letters', 'digits',], length=15) }}"
+  tasks:
+    - name: Template file
+      ansible.builtin.template:
+        src: doc.j2
+        dest: doc.md
+        
+    - name: Display information to user
+      debug:
+        msg: "{{ lookup('template', 'doc.md') }}"

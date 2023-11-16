@@ -1,0 +1,20 @@
+# {{ application.name }}
+
+You just deployed a new application named {{ application.name }} in version {{ application.version }}
+
+To deploy this application, you must install the following requirements:
+
+{% for requirement in application.requirements %}
+  - {{ requirement }}
+{% endfor %}
+
+To access to the MySQL Database, you must log with :
+
+- username: {{ mysql.username }}
+- password: {{ mysql.password }}
+- host: {{ inventory_hostname }}
+- database: {{ mysql.database }} 
+
+Please log with the following command :
+
+mysql --host={{ inventory_hostname }} --user={{ mysql.username }} --password={{ mysql.password }} {{ mysql.database }} 

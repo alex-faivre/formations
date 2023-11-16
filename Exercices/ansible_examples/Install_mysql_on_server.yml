@@ -1,0 +1,26 @@
+- hosts: all
+  become: true
+  gather_facts: true
+  # BEFORE
+  # tasks:
+  #   - name: Install MySQL-server on remote server
+  #     ansible.builtin.package:
+  #       name: mysql-server
+  #       state: latest
+  #     register: install_status
+    
+  #   - name: Display install status
+  #     ansible.builtin.debug:
+  #       msg: "{{ install_status }}"
+  #     when: install_status is defined
+
+  #   - name: Display message if installation success
+  #     ansible.builtin.debug:
+  #       msg: "{{ message }}"
+  #     when: 
+  #       - message is defined
+  #       - install_status.failed == false
+  #
+  # AFTER
+  roles:
+    - mysql

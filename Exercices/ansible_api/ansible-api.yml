@@ -1,0 +1,12 @@
+- hosts: all
+  gather_facts: false
+  become: false
+  tasks:
+    - name: Call API on Netbox - check Healthcheck
+      ansible.builtin.uri:
+        url: https://demo.nautobot.com/health/
+      register: url_health
+      
+    - name: Display template
+      debug:
+        msg: "{{ lookup('template', 'template.j2') }}"
