@@ -1,0 +1,17 @@
+- hosts: all
+  become: true
+  gather_facts: false
+  tasks:
+    - name: Install packages
+      ansible.builtin.package:
+        name: sl
+        state: present
+    
+    - name: Create user
+      ansible.builtin.user:
+        name: tinion
+        comment: Utilisateur principal d'Alex
+    
+    - name: Display message
+      ansible.builtin.debug:
+        msg: "Hello"

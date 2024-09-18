@@ -1,0 +1,11 @@
+- hosts: all
+  tasks:
+    - name: Copy file with md5sum
+      ansible.builtin.copy:
+        src: test.txt
+        dest: /tmp/test.txt
+      register: create_file_result
+    
+    - name: Display create_file_result var
+      ansible.builtin.debug:
+        var: create_file_result.md5sum

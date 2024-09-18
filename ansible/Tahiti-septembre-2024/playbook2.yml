@@ -1,0 +1,22 @@
+- hosts: all
+  become: true
+  gather_facts: true
+  vars: 
+    message: "Welcome"
+    packages: htop
+    user: tinion
+    comment_user: "User d'Alex"
+  tasks:
+    - name: Install packages
+      ansible.builtin.package:
+        name: "{{ packages }}"
+        state: present
+     
+    - name: "Create user {{ user }}"
+      ansible.builtin.user:
+        name: "{{ user }}"
+        comment: "{{ comment_user }}"
+
+    - name: Display message
+      ansible.builtin.debug:
+        msg: "{{ message }}"

@@ -1,0 +1,6 @@
+---
+# defaults file for postgres
+packages: 
+  - postgresql
+  - postgresql-client
+  - libpq-dev

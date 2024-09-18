@@ -1,0 +1,253 @@
+{
+    "ansible_facts": {
+        "ansible_all_ipv4_addresses": [
+            "172.31.4.220"
+        ],
+        "ansible_all_ipv6_addresses": [
+            "fe80::215:5dff:fe7b:f327"
+        ],
+        "ansible_apparmor": {
+            "status": "disabled"
+        },
+        "ansible_architecture": "x86_64",
+        "ansible_cmdline": {
+            "WSL_ROOT_INIT": "1",
+            "console": "hvc0",
+            "debug": true,
+            "hv_utils.timesync_implicit": "1",
+            "initrd": "\\initrd.img",
+            "nr_cpus": "12",
+            "panic": "-1",
+            "pty.legacy_count": "0"
+        },
+        "ansible_date_time": {
+            "date": "2024-09-17",
+            "day": "17",
+            "epoch": "1726617856",
+            "epoch_int": "1726617856",
+            "hour": "14",
+            "iso8601": "2024-09-18T00:04:16Z",
+            "iso8601_basic": "20240917T140416850627",
+            "iso8601_basic_short": "20240917T140416",
+            "iso8601_micro": "2024-09-18T00:04:16.850627Z",
+            "minute": "04",
+            "month": "09",
+            "second": "16",
+            "time": "14:04:16",
+            "tz": "HST",
+            "tz_dst": "HST",
+            "tz_offset": "-1000",
+            "weekday": "Tuesday",
+            "weekday_number": "2",
+            "weeknumber": "38",
+            "year": "2024"
+        },
+        "ansible_default_ipv4": {
+            "address": "172.31.4.220",
+            "alias": "eth0",
+            "broadcast": "172.31.15.255",
+            "gateway": "172.31.0.1",
+            "interface": "eth0",
+            "macaddress": "00:15:5d:7b:f3:27",
+            "mtu": 1500,
+            "netmask": "255.255.240.0",
+            "network": "172.31.0.0",
+            "prefix": "20",
+            "type": "ether"
+        },
+        "ansible_default_ipv6": {},
+        "ansible_distribution": "Ubuntu",
+        "ansible_distribution_file_parsed": true,
+        "ansible_distribution_file_path": "/etc/os-release",
+        "ansible_distribution_file_variety": "Debian",
+        "ansible_distribution_major_version": "22",
+        "ansible_distribution_release": "jammy",
+        "ansible_distribution_version": "22.04",
+        "ansible_dns": {
+            "nameservers": [
+                "172.31.0.1"
+            ]
+        },
+        "ansible_domain": "",
+        "ansible_effective_group_id": 1000,
+        "ansible_effective_user_id": 1000,
+        "ansible_env": {
+            "DBUS_SESSION_BUS_ADDRESS": "unix:path=/run/user/1000/bus",
+            "DISPLAY": ":0",
+            "HOME": "/home/tinion",
+            "HOSTTYPE": "x86_64",
+            "LANG": "C.UTF-8",
+            "LESSCLOSE": "/usr/bin/lesspipe %s %s",
+            "LESSOPEN": "| /usr/bin/lesspipe %s",
+            "LOGNAME": "tinion",
+            "LS_COLORS": "rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:",
+            "NAME": "pc-form-sf2i-01",
+            "PATH": "/home/tinion/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/Program Files/Google/Chrome/Application:/mnt/c/Windows/system32:/mnt/c/Windows:/mnt/c/Windows/System32/Wbem:/mnt/c/Windows/System32/WindowsPowerShell/v1.0/:/mnt/c/Windows/System32/OpenSSH/:/mnt/c/Program Files/Kubernetes/Minikube:/Docker/host/bin:/mnt/c/Windows/system32/config/systemprofile/AppData/Local/Microsoft/WindowsApps:/mnt/c/Program Files/Lens/resources/cli/bin:/snap/bin",
+            "PULSE_SERVER": "unix:/mnt/wslg/PulseServer",
+            "PWD": "/mnt/c/Users/Admin/ansible-tahiti-septembre-2024",
+            "SHELL": "/bin/bash",
+            "SHLVL": "1",
+            "TERM": "xterm-256color",
+            "USER": "tinion",
+            "WAYLAND_DISPLAY": "wayland-0",
+            "WSL2_GUI_APPS_ENABLED": "1",
+            "WSLENV": "",
+            "WSL_DISTRO_NAME": "Ubuntu",
+            "WSL_INTEROP": "/run/WSL/610_interop",
+            "XDG_DATA_DIRS": "/usr/local/share:/usr/share:/var/lib/snapd/desktop",
+            "XDG_RUNTIME_DIR": "/run/user/1000/",
+            "_": "/home/tinion/.local/bin/ansible"
+        },
+        "ansible_eth0": {
+            "active": true,
+            "device": "eth0",
+            "ipv4": {
+                "address": "172.31.4.220",
+                "broadcast": "172.31.15.255",
+                "netmask": "255.255.240.0",
+                "network": "172.31.0.0",
+                "prefix": "20"
+            },
+            "ipv6": [
+                {
+                    "address": "fe80::215:5dff:fe7b:f327",
+                    "prefix": "64",
+                    "scope": "link"
+                }
+            ],
+            "macaddress": "00:15:5d:7b:f3:27",
+            "module": "hv_netvsc",
+            "mtu": 1500,
+            "pciid": "d62765dd-f2af-426f-92a6-97be25edfc7e",
+            "promisc": false,
+            "speed": 10000,
+            "type": "ether"
+        },
+        "ansible_fibre_channel_wwn": [],
+        "ansible_fips": false,
+        "ansible_fqdn": "pc-form-sf2i-01.",
+        "ansible_hostname": "pc-form-sf2i-01",
+        "ansible_hostnqn": "",
+        "ansible_interfaces": [
+            "eth0",
+            "lo"
+        ],
+        "ansible_is_chroot": false,
+        "ansible_iscsi_iqn": "",
+        "ansible_kernel": "5.15.153.1-microsoft-standard-WSL2",
+        "ansible_kernel_version": "#1 SMP Fri Mar 29 23:14:13 UTC 2024",
+        "ansible_lo": {
+            "active": true,
+            "device": "lo",
+            "ipv4": {
+                "address": "127.0.0.1",
+                "broadcast": "",
+                "netmask": "255.0.0.0",
+                "network": "127.0.0.0",
+                "prefix": "8"
+            },
+            "ipv6": [
+                {
+                    "address": "::1",
+                    "prefix": "128",
+                    "scope": "host"
+                }
+            ],
+            "mtu": 65536,
+            "promisc": false,
+            "type": "loopback"
+        },
+        "ansible_loadavg": {
+            "15m": 0.00390625,
+            "1m": 0.0576171875,
+            "5m": 0.04833984375
+        },
+        "ansible_local": {},
+        "ansible_locally_reachable_ips": {
+            "ipv4": [
+                "127.0.0.0/8",
+                "127.0.0.1",
+                "172.31.4.220"
+            ],
+            "ipv6": [
+                "::1",
+                "fe80::215:5dff:fe7b:f327"
+            ]
+        },
+        "ansible_lsb": {
+            "codename": "jammy",
+            "description": "Ubuntu 22.04.3 LTS",
+            "id": "Ubuntu",
+            "major_release": "22",
+            "release": "22.04"
+        },
+        "ansible_machine": "x86_64",
+        "ansible_machine_id": "6d172caa37144b71badbaa98b57c1e41",
+        "ansible_nodename": "pc-form-sf2i-01",
+        "ansible_os_family": "Debian",
+        "ansible_pkg_mgr": "apt",
+        "ansible_proc_cmdline": {
+            "WSL_ROOT_INIT": "1",
+            "console": "hvc0",
+            "debug": true,
+            "hv_utils.timesync_implicit": "1",
+            "initrd": "\\initrd.img",
+            "nr_cpus": "12",
+            "panic": "-1",
+            "pty.legacy_count": "0"
+        },
+        "ansible_python": {
+            "executable": "/usr/bin/python3.10",
+            "has_sslcontext": true,
+            "type": "cpython",
+            "version": {
+                "major": 3,
+                "micro": 12,
+                "minor": 10,
+                "releaselevel": "final",
+                "serial": 0
+            },
+            "version_info": [
+                3,
+                10,
+                12,
+                "final",
+                0
+            ]
+        },
+        "ansible_python_version": "3.10.12",
+        "ansible_real_group_id": 1000,
+        "ansible_real_user_id": 1000,
+        "ansible_selinux": {
+            "status": "disabled"
+        },
+        "ansible_selinux_python_present": true,
+        "ansible_service_mgr": "systemd",
+        "ansible_system": "Linux",
+        "ansible_system_capabilities": [
+            ""
+        ],
+        "ansible_system_capabilities_enforced": "True",
+        "ansible_user_dir": "/home/tinion",
+        "ansible_user_gecos": "Utilisateur principal d'Alex",
+        "ansible_user_gid": 1000,
+        "ansible_user_id": "tinion",
+        "ansible_user_shell": "/bin/bash",
+        "ansible_user_uid": 1000,
+        "ansible_userspace_architecture": "x86_64",
+        "ansible_userspace_bits": "64",
+        "ansible_virtualization_role": "guest",
+        "ansible_virtualization_tech_guest": [
+            "container",
+            "wsl"
+        ],
+        "ansible_virtualization_tech_host": [],
+        "ansible_virtualization_type": "wsl",
+        "discovered_interpreter_python": "/usr/bin/python3.10",
+        "gather_subset": [
+            "all"
+        ],
+        "module_setup": true
+    },
+    "changed": false
+}

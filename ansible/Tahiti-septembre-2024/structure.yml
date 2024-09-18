@@ -1,0 +1,29 @@
+chaine: "Je suis une chaine de caractère"
+
+liste_forme_1:
+  - fruits
+  - legumes
+
+liste_forme_2: ["fruits","legumes"]
+
+dictionnaire_forme1: {
+  "key": "value"
+}
+
+dictionnaire_forme_2: 
+  key: "value"
+
+liste_dict:
+  - alex: 
+      tel: 06000000
+      mail: alex.faivre.formation@gmail.com
+
+for element in list_dict:
+  print(element["alex"]["tel"]) # 0600000
+
+liste: [[1,2,3],[1,2,3]]
+
+liste_courses:
+  fruits: [kiwi, bananes]
+  legumes: 
+    - tomates
