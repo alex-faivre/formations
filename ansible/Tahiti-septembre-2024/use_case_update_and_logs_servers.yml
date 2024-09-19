@@ -2,10 +2,10 @@
   gather_facts: true
   vars:
     date: "{{ lookup('pipe', 'date +%Y-%m-%d') }}"
-    log_dir: "/opt/{{ date }}"
+    log_dir: "/opt/{{ date }}/{{ inventory_hostname }}"
 
   tasks:
     - name: Create directories
       ansible.builtin.file:
-        path: "{{ log_dir }}/{{ inventory_hostname }}"
+        path: "{{ log_dir }}"
         state: directory
