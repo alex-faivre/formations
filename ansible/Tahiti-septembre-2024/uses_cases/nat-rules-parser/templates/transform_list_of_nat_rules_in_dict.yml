@@ -1,0 +1,10 @@
+{% set florian_nat_rules = {} %}
+{% set _ = {} %}
+{% for nat_rule in nat_rules %}
+{% for element in nat_rule[1:] %}
+{% set element = element.split('=') %}
+{% set _ = ( _ | combine( { element[0]: element[1] } ) ) %}
+{{ florian_nat_rules | combine( { nat_rule[0]: _  } ) }}
+{% set florian_nat_rules = florian_nat_rules | combine( { nat_rule[0]: _  } ) %}
+{% endfor %}
+{% endfor %}

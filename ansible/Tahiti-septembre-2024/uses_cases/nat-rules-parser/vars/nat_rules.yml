@@ -1,0 +1,4 @@
+nat_rules:
+  - 1 chain=dstnat action=dst-nat to-addresses=127.0.0.1 to-port=22001 protocol=tcp in-interface-list=WAN dst-port=25000
+  - 2 chain=dstnat action=dst-nat to-addresses=127.0.0.1 to-port=22002 protocol=tcp in-interface-list=WAN dst-port=25000
+  - 3 chain=dstnat action=dst-nat to-addresses=127.0.0.1 to-port=22003 protocol=tcp in-interface-list=WAN dst-port=25000

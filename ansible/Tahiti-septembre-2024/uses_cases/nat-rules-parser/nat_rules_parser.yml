@@ -1,0 +1,53 @@
+- hosts: local
+  connection: local
+  tasks:
+    - name: Display content of vars
+      ansible.builtin.include_vars:
+        file: vars/nat_rules.yml
+        name: var
+
+    - name: Display existing nat rules
+      ansible.builtin.debug:
+        msg: "{{ var }}"
+
+    - name: Display existing nat rules - Show type of the variable var
+      ansible.builtin.debug:
+        msg: "{{ var | type_debug }}"
+
+    - name: Display existing nat rules - Show type of the variable var.nat_rules
+      ansible.builtin.debug:
+        msg: "{{ var.nat_rules | type_debug }}"
+    
+    - name: Parse list to print values
+      ansible.builtin.debug:
+        msg: "{{ item }}"
+      loop: "{{ var.nat_rules }}"
+      when: "'22000' in item"
+
+    - name: Parse list to print values
+      ansible.builtin.debug:
+        msg: "{{ item.split(' ')[1:] }}"
+      loop: "{{ var.nat_rules }}"
+
+    - name: Create list of nat rules without index (obtain by loop_control/index)
+      ansible.builtin.set_fact:
+        nat_rules: "{{ (nat_rules | default([]) ) + [ item.split(' ')[:] ] }}"
+      loop: "{{ var.nat_rules }}"
+
+    - name: Parse list to print values
+      ansible.builtin.debug:
+        var: nat_rules
+    
+    # - name: Transform each element of nat_rule in dictionnary
+    #   ansible.builtin.debug: 
+    #     msg: "{{ lookup('template' , 'templates/transform_list_of_nat_rules_in_dict.yml') }}"
+    #   loop: "{{ nat_rules_without_index }}"
+    #   loop_control:
+    #     index_var: idx
+    #     loop_var: nat_rule
+
+    - name: template file in folder
+      ansible.builtin.template:
+        src: templates/transform_list_of_nat_rules_in_dict.yml
+        dest: ./template.txt
+      loop: "{{ nat_rules }}"
