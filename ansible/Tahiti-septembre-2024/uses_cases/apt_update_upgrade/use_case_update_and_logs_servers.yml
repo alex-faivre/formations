@@ -5,7 +5,6 @@
     log_dir: "/opt/{{ date }}/{{ inventory_hostname }}"
     time: "{{ lookup('pipe', 'date +%H-%M-%S') }}"
   tasks:
-  ####################################
     - name: "Create log dir {{ log_dir }}"
       delegate_to: localhost
       ansible.builtin.file:
@@ -13,7 +12,6 @@
         state: directory
         mode: '0750'
 
-    ####################################
     - name: "[APT update] MAJ Repo & Cache"
       become: true
       ansible.builtin.apt:
@@ -34,7 +32,6 @@
       ansible.builtin.debug:
         msg: "{{ _result_update_display }}"
 
-    ####################################
     - name: "[APT dist-upgrade] MAJ OS"
       become: true
       ansible.builtin.apt:
@@ -55,14 +52,12 @@
       ansible.builtin.debug:
         msg: "{{ _result_upgrade_display }}"
 
-    ####################################
     - name: "[APT clean] Clean cache"
       become: true
       ansible.builtin.apt:
         clean: true
         autoclean: true
-  
-    ####################################
+
     - name: "[APT Remove] Autoremove & purge"
       become: true
       ansible.builtin.apt:
@@ -84,7 +79,6 @@
       ansible.builtin.debug:
         msg: "{{ _result_remove_display }}"
 
-    ####################################
     - name: "Check Reboot required"
       ansible.builtin.stat:
         path: /var/run/reboot-required
