@@ -1,0 +1,6 @@
+- hosts: all
+  gather_facts: no
+  tasks:
+    - name: Backup current switch config (ios)
+      cisco.ios.ios_config:
+        backup: yes
