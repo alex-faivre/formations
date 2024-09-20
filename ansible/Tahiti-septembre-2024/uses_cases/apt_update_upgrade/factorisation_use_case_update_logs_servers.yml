@@ -1,0 +1,81 @@
+- hosts: all 
+  gather_facts: true
+  vars:
+    date:    "{{ lookup('pipe', 'date +%Y-%m-%d')   }}"
+    log_dir: "/opt/{{ date }}/{{ inventory_hostname }}"
+    time:    "{{ lookup('pipe', 'date +%H-%M-%S')   }}"
+  tasks:
+    - name: "Create log dir {{ log_dir }}"
+      delegate_to: localhost
+      ansible.builtin.file:
+        path: "{{ log_dir }}"
+        state: directory
+        mode: '0750'
+
+    - name: "[APT update] MAJ Repo & Cache"
+      become: true
+      ansible.builtin.apt:
+        update_cache: true
+      register: _result_update_raw
+
+    - name: "[APT dist-upgrade] MAJ OS"
+      become: true
+      ansible.builtin.apt:
+        upgrade: dist
+      register: _result_upgrade_raw
+
+    - name: "[APT clean] Clean cache"
+      become: true
+      ansible.builtin.apt:
+        clean: true
+        autoclean: true
+
+    - name: "[APT Remove] Autoremove & purge"
+      become: true
+      ansible.builtin.apt:
+        autoremove: true
+        purge: true
+      register: _result_remove_raw
+
+    - name: "[APT dist-upgrade] Format Result"
+      ansible.builtin.set_fact:
+        _result_update_display:  "{{ (_result_update_raw.stdout is defined)  | ternary(_result_update_raw.stdout,_result_update_raw) }}"
+        _result_upgrade_display: "{{ (_result_upgrade_raw.stdout is defined) | ternary(_result_upgrade_raw.stdout,_result_upgrade_raw) }}"
+        _result_remove_display:  "{{ (_result_remove_raw.stdout is defined)  | ternary(_result_remove_raw.stdout,_result_remove_raw)   }}"
+
+
+    - name: "[APT update] Log to file"
+      delegate_to: localhost
+      ansible.builtin.template:
+        src: display_command_results.j2
+        dest: "{{ template.filepath }}"
+      loop:
+        - { filepath: "{{ log_dir }}/apt_update_{{ time }}.log"     , var: "{{ _result_update_display  }}" }
+        - { filepath: "{{ log_dir }}/apt_upgrade_{{ time }}.log"    , var: "{{ _result_upgrade_display }}" }
+        - { filepath: "{{ log_dir }}/apt_autoremove_{{ time }}.log" , var: "{{ _result_remove_display  }}" }
+      loop_control:
+        loop_var: template
+      
+    - name: "[APT update] Display Result"
+      ansible.builtin.debug:
+        var: disply_var
+      loop:
+        - _result_update_display.stdout
+        - _result_upgrade_display.stdout
+        - _result_remove_display.stdout
+      loop_control:
+        loop_var: disply_var
+      when: 
+        - var.stdout is defined
+        - debug is defined
+        - debug
+
+    - name: "Check Reboot required"
+      ansible.builtin.stat:
+        path: /var/run/reboot-required
+      register: _reboot_required_file
+
+    - name: "Display Reboot required"
+      ansible.builtin.debug:
+        msg: "Need reboot {{ hostname }}"
+      when: _reboot_required_file.stat.exists

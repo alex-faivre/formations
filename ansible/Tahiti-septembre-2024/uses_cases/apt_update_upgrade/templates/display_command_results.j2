@@ -1,0 +1,9 @@
+{% set _action = template.filepath.split('/')[-1].split('_')[0:2] | join(' ') %}
+# Logs from Ansible playbook "factorisation_use_case_update_logs_servers.yml"
+# Date: {{ date }}
+# Hostname: {{ inventory_hostname }}
+# Nom du fichier: {{ template.filepath }}
+# Action sur le serveur: {{ _action }} 
+#########################################################
+{{ template.var }}
+#########################################################
