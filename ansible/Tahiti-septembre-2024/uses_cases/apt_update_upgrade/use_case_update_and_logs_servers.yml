@@ -3,9 +3,94 @@
   vars:
     date: "{{ lookup('pipe', 'date +%Y-%m-%d') }}"
     log_dir: "/opt/{{ date }}/{{ inventory_hostname }}"
-
+    time: "{{ lookup('pipe', 'date +%H-%M-%S') }}"
   tasks:
-    - name: Create directories
+  ####################################
+    - name: "Create log dir {{ log_dir }}"
+      delegate_to: localhost
       ansible.builtin.file:
         path: "{{ log_dir }}"
         state: directory
+        mode: '0750'
+
+    ####################################
+    - name: "[APT update] MAJ Repo & Cache"
+      become: true
+      ansible.builtin.apt:
+        update_cache: true
+      register: _result_update_raw
+
+    - name: "[APT update] Format result"
+      ansible.builtin.set_fact:
+        _result_update_display: "{{ (_result_update_raw.stdout is defined) | ternary(_result_update_raw.stdout,_result_update_raw) }}"
+
+    - name: "[APT update] Log to file"
+      delegate_to: localhost
+      ansible.builtin.template:
+        src: templates/01_apt-get_update_log.j2
+        dest: "{{ log_dir }}/01_apt-get_update_{{ time }}.log"
+
+    - name: "[APT update] Display Result"
+      ansible.builtin.debug:
+        msg: "{{ _result_update_display }}"
+
+    ####################################
+    - name: "[APT dist-upgrade] MAJ OS"
+      become: true
+      ansible.builtin.apt:
+        upgrade: dist
+      register: _result_upgrade_raw
+
+    - name: "[APT dist-upgrade] Format Result"
+      ansible.builtin.set_fact:
+        _result_upgrade_display: "{{ (_result_upgrade_raw.stdout is defined) | ternary(_result_upgrade_raw.stdout,_result_upgrade_raw) }}"
+
+    - name: "[APT dist-upgrade] Log to file"
+      delegate_to: localhost
+      ansible.builtin.template:
+        src: templates/02_apt-get_dist-upgrade_log.j2
+        dest: "{{ log_dir }}/02_apt-get_dist-upgrade_{{ time }}.log"
+
+    - name: "[APT dist-upgrade] Display Result"
+      ansible.builtin.debug:
+        msg: "{{ _result_upgrade_display }}"
+
+    ####################################
+    - name: "[APT clean] Clean cache"
+      become: true
+      ansible.builtin.apt:
+        clean: true
+        autoclean: true
+  
+    ####################################
+    - name: "[APT Remove] Autoremove & purge"
+      become: true
+      ansible.builtin.apt:
+        autoremove: true
+        purge: true
+      register: _result_remove_raw
+
+    - name: "[APT Remove] Format Result"
+      ansible.builtin.set_fact:
+        _result_remove_display: "{{ (_result_remove_raw.stdout is defined) | ternary(_result_remove_raw.stdout,_result_remove_raw) }}"
+
+    - name: "[APT Remove] Log to file"
+      delegate_to: localhost
+      ansible.builtin.template:
+        src: templates/03_apt-get_autoremove_log.j2
+        dest: "{{ log_dir }}/03_apt-get_autoremove_{{ time }}.log"
+
+    - name: "[APT Remove] Display Result"
+      ansible.builtin.debug:
+        msg: "{{ _result_remove_display }}"
+
+    ####################################
+    - name: "Check Reboot required"
+      ansible.builtin.stat:
+        path: /var/run/reboot-required
+      register: _reboot_required_file
+
+    - name: "Display Reboot required"
+      ansible.builtin.debug:
+        msg: "Need reboot {{ hostname }}"
+      when: _reboot_required_file.stat.exists
