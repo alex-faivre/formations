@@ -1,0 +1,27 @@
+- hosts: all
+  gather_facts: false
+  tasks:
+    - name: Decode password from group_vars/all/password.yml
+      ansible.builtin.debug:
+        msg: "Decode password -> {{ pass }}"
+
+    - name: Generate random password
+      ansible.builtin.debug:
+        msg: "Random password {{ lookup('ansible.builtin.password', '/dev/null', chars=['ascii_letters', 'digits', 'punctuation'],  length=2) }}"
+
+    - name: Template welcome for new user
+      ansible.builtin.template:
+        src: templates/new_user.j2
+        dest: /tmp/welcome_florian.md
+
+    - name: Display welcome file generate before
+      ansible.builtin.debug:
+        msg: "{{ lookup('file', '/tmp/welcome_florian.md') }}"
+    
+    - name: Display lookup_template.j2
+      ansible.builtin.debug:
+        msg: "{{ lookup('template', 'templates/lookup_template.j2') }}"
+
+    - name: Display lookup_template.j2
+      ansible.builtin.debug:
+        msg: "{{ lookup('template', 'templates/new_user.j2') }}"

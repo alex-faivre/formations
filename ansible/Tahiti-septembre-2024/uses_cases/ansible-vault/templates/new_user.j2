@@ -1,0 +1,8 @@
+# Bienvenue dans notre SI
+
+## Voici vos identifiants :
+
+On a fait un mot de passe court, à la DSI on a pas le temps pour le support.
+
+identifiant: Florian
+mot de passe: {{ lookup('ansible.builtin.password', '/dev/null', chars=['ascii_letters', 'digits', 'punctuation'],  length=20) }}
