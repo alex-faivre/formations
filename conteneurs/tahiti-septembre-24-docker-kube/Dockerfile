@@ -1,5 +1,5 @@
 # Utilisation de l'image Python slim
-FROM python:3.14.0-slim
+FROM python:3.14.3-slim
 
 # Définition du répertoire de travail
 WORKDIR /app
